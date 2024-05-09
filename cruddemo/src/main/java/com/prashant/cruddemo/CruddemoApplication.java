@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class CruddemoApplication {
 
@@ -21,10 +23,34 @@ public class CruddemoApplication {
 		};
 	}
 
+	private void deleteAllStudent(StudentDAO studentDAO) {
+		System.out.println(studentDAO.deleteAll());
+	}
+
+	private void deleteStudent(StudentDAO studentDAO) {
+		getAllStudents(studentDAO);
+		studentDAO.delete(1001);
+		getAllStudents(studentDAO);
+	}
+
+	private void updateStudent(StudentDAO studentDAO) {
+		Student a = studentDAO.findById(1001);
+		a.setLastname("Shukla");
+		studentDAO.update(a);
+		System.out.println(studentDAO.findById(1001));
+	}
+
+	private void getAllStudents(StudentDAO studentDAO) {
+		List<Student> students = studentDAO.findAll();
+		for (Student student: students) {
+			System.out.println(student);
+		}
+	}
+
 	private void createStudent(StudentDAO studentDAO) {
 		// create the student object
 		System.out.println("Creating new student object.....");
-		Student newStudent = new Student("Prashant", "Shukla", "itisprash@gmail.com");
+		Student newStudent = new Student("Aman", "Singh", "thakur@gmail.com");
 
 
 		//save the student in the database
