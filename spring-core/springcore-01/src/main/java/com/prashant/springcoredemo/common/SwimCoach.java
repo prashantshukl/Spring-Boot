@@ -1,5 +1,9 @@
 package com.prashant.springcoredemo.common;
 
+
+import org.springframework.stereotype.Component;
+
+@Component
 public class SwimCoach implements Coach{
     @Override
     public String getDailyWorkout() {
