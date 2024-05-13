@@ -2,11 +2,12 @@ package com.prashant.springrestdemo.rest;
 
 
 import com.prashant.springrestdemo.entity.Student;
+import com.prashant.springrestdemo.entity.StudentNotFoundException;
+import com.prashant.springrestdemo.entity.StudentNotFoundResponse;
 import jakarta.annotation.PostConstruct;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,9 @@ public class StudentRestController {
     // Defining endpoint for /students
     @GetMapping("/students/{studentId}")
     public Student getStudentList(@PathVariable int studentId) {
+        if (studentId >= theStudents.size() || studentId < 0) {
+            throw new StudentNotFoundException("student id Not found for id :" + studentId);
+        }
         return theStudents.get(studentId);
     }
 }

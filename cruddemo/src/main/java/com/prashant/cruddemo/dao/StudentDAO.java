@@ -8,7 +8,6 @@ public interface StudentDAO {
 
     void save(Student theStudent);
 
-
     Student findById(Integer Id);
 
     List<Student> findAll();
