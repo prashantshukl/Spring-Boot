@@ -4,6 +4,7 @@ import com.prashant.advhb.dao.AppDAO;
 import com.prashant.advhb.entity.Course;
 import com.prashant.advhb.entity.Instructor;
 import com.prashant.advhb.entity.InstructorDetail;
+import com.prashant.advhb.entity.Student;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,9 +22,20 @@ public class AdvHbApplication {
 		return runner -> {
 			//createInstructor(dao);
 			//findInstructor(dao);
-			addCourses(dao);
+			//addCourses(dao);
+
+			createCourseAndStudents(dao);
 		};
 
+	}
+
+	private void createCourseAndStudents(AppDAO dao) {
+		Course course = new Course("SpringBoot");
+		Student one = new Student("Prashant", "Shukla", "prash@love2code.com");
+		Student two = new Student("Aman", "Singh", "aman@gmail.com");
+		course.addStudent(one);
+		course.addStudent(two);
+		
 	}
 
 	private void addCourses(AppDAO dao) {
